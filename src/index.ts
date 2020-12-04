@@ -22,6 +22,10 @@ const useRecordMp3 = (stream: any, encoderOptions: EncoderOptions) => {
 
   const [channelData, setChannelData] = useState<Float32Array | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
+
+  // TODO normalize encoderOptions
+  // stream.getAudioTracks()[0]
+  // sampleRate, channelCount
   const [blobUrl, blob]: any = useConvert(channelData, encoderOptions);
 
   const startRecording = () => {

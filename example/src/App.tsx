@@ -6,11 +6,6 @@ import GitHubRibbon from "react-github-fork-ribbon";
 
 const constraints = {
   audio: true,
-  // audio: {
-  //   //   // sampleRate: 48000,
-  //   //   // sampleSize: 16,
-  //   // channelCount: 2,
-  // },
 };
 
 // https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
@@ -103,6 +98,7 @@ const App = () => {
           </div>
         </div>
       )}
+
       <GitHubRibbon
         color="black"
         position="right"
