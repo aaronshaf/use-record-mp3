@@ -15,7 +15,7 @@ import useUserMedia from "react-use-user-media";
 import useRecordMp3 from "use-record-mp3";
 
 const Example = () => {
-  const { stream } = useUserMedia(constraints);
+  const { stream } = useUserMedia({ audio: true });
   const { isRecording, setIsRecording, blobUrl, channelData } = useRecordMp3(
     stream,
     {
