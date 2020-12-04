@@ -106,7 +106,6 @@ const App = () => {
       <GitHubRibbon
         color="black"
         position="right"
-        target="_blank"
         href="https://github.com/aaronshaf/use-record-mp3"
       >
         GitHub repo
