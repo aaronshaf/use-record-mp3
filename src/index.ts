@@ -11,7 +11,6 @@ const numberOfOutputChannels = 1;
 
 const useRecordMp3 = (stream: any, encoderOptions: EncoderOptions) => {
   const [isRecording, setIsRecording] = useState(false);
-  console.debug(encoderOptions);
 
   const [
     mediaStream,

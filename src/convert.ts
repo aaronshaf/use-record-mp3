@@ -4,7 +4,7 @@ import { EncoderOptions } from "./typings";
 
 let outBuffer = new Uint8Array(1024 * 1024);
 
-const useConvert = (pcm_l: any, options: EncoderOptions = {}) => {
+const useConvert = (pcm_l: any, options: EncoderOptions) => {
   const [blob, setBlob] = useState<Blob | null>(null);
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const encoderPromise = useMemo(() => createMp3Encoder(), []);
@@ -12,11 +12,19 @@ const useConvert = (pcm_l: any, options: EncoderOptions = {}) => {
   useEffect(() => {
     if (!pcm_l) return;
     encoderPromise.then((encoder) => {
-      encoder.configure({
-        sampleRate: options.sampleRate || 48000,
-        channels: options.channels || 1,
-        vbrQuality: options.vbrQuality || 1,
-      });
+      encoder.configure(
+        options.bitrate
+          ? {
+              sampleRate: options.sampleRate || 48000,
+              channels: options.channels || 1,
+              bitrate: options.bitrate,
+            }
+          : {
+              sampleRate: options.sampleRate || 48000,
+              channels: options.channels || 1,
+              vbrQuality: options.vbrQuality || 2,
+            }
+      );
 
       let offset = 0;
       let moreData = true;

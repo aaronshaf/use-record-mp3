@@ -36,6 +36,8 @@ const Example = () => {
 };
 ```
 
+Instead of `vbrQuality` you can specify `bitrate` (e.g. 96, 128).
+
 ## License
 
 MIT © [aaronshaf](https://github.com/aaronshaf)

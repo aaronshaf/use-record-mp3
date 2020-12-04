@@ -41,7 +41,8 @@ const App = () => {
     {
       sampleRate: 48000,
       channels: 1,
-      vbrQuality: 2,
+      bitrate: 96,
+      // vbrQuality: 2,
     }
   );
 
