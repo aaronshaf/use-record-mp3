@@ -1,12 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import useUserMedia from "react-use-user-media";
 import useRecordMp3 from "use-record-mp3";
 import ow from "oceanwind";
 import GitHubRibbon from "react-github-fork-ribbon";
-
-const constraints = {
-  audio: true,
-};
 
 // https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
 const filterData = (rawData: any) => {
@@ -31,6 +27,9 @@ const filterData = (rawData: any) => {
 // }
 
 const App = () => {
+  const [constraints] = useState({
+    audio: true,
+  });
   const { stream } = useUserMedia(constraints);
   const {
     isRecording,
@@ -41,10 +40,9 @@ const App = () => {
     blobUrl,
     channelData,
   } = useRecordMp3(stream, {
-    sampleRate: 48000,
-    channels: 1,
-    bitrate: 96,
-    // vbrQuality: 2,
+    // channels: 1,
+    // bitrate: 96,
+    vbrQuality: 2,
   });
 
   const chart = channelData ? filterData(channelData) : [];

@@ -23,9 +23,13 @@ const useRecordMp3 = (stream: any, encoderOptions: EncoderOptions) => {
   const [channelData, setChannelData] = useState<Float32Array | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
 
-  // TODO normalize encoderOptions
-  // stream.getAudioTracks()[0]
-  // sampleRate, channelCount
+  // TODO: stop mutating object?
+  if (stream && !encoderOptions.sampleRate) {
+    encoderOptions.sampleRate = stream
+      .getAudioTracks()[0]
+      .getCapabilities().sampleRate.max;
+  }
+
   const [blobUrl, blob]: any = useConvert(channelData, encoderOptions);
 
   const startRecording = () => {
@@ -38,7 +42,9 @@ const useRecordMp3 = (stream: any, encoderOptions: EncoderOptions) => {
     }
     setisRecordingPaused(false);
 
-    audioContext.current = new AudioContext();
+    audioContext.current = new AudioContext({
+      sampleRate: encoderOptions.sampleRate,
+    });
     const context = audioContext.current;
 
     // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor

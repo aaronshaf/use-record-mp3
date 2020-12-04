@@ -14,8 +14,10 @@ npm i use-record-mp3
 import useUserMedia from "react-use-user-media";
 import useRecordMp3 from "use-record-mp3";
 
+const constraints = { audio: true };
+
 const Example = () => {
-  const { stream } = useUserMedia({ audio: true });
+  const { stream } = useUserMedia(constraints);
   const {
     isRecording,
     startRecording,
@@ -23,8 +25,6 @@ const Example = () => {
     blobUrl,
     channelData,
   } = useRecordMp3(stream, {
-    sampleRate: 48000,
-    channels: 1,
     vbrQuality: 2, // 1 (highest) to 9 (lowest)
   });
 
