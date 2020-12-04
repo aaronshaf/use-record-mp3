@@ -24,7 +24,15 @@ const Example = () => {
       vbrQuality: 2, // 1 (highest) to 9 (lowest)
     }
   );
-  // ...
+
+  return (
+    <div>
+      <button onClick={() => setIsRecording(!isRecording)}>
+        {isRecording ? "Stop" : "Record"}
+      </button>
+      {blobUrl && <audio controls src={blobUrl}></audio>}
+    </div>
+  );
 };
 ```
 
