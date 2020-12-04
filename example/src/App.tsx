@@ -27,10 +27,13 @@ const filterData = (rawData: any) => {
 // }
 
 const App = () => {
-  const [constraints] = useState({
+  const [constraints] = useState<MediaStreamConstraints>({
     audio: true,
   });
   const { stream } = useUserMedia(constraints);
+
+  const device = stream && stream.getAudioTracks()[0].label;
+
   const {
     isRecording,
     isRecordingPaused,
@@ -40,7 +43,8 @@ const App = () => {
     blobUrl,
     channelData,
   } = useRecordMp3(stream, {
-    // channels: 1,
+    sampleRate: 48000,
+    channels: 1,
     // bitrate: 96,
     vbrQuality: 2,
   });
@@ -58,6 +62,7 @@ const App = () => {
       ></div>
     );
   });
+
   return (
     <div className={ow`p-6`}>
       <button
@@ -96,6 +101,8 @@ const App = () => {
           </div>
         </div>
       )}
+
+      {device}
 
       <GitHubRibbon
         color="black"

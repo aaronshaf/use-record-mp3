@@ -41,6 +41,10 @@ const Example = () => {
 
 Instead of `vbrQuality` you can specify `bitrate` (e.g. 96, 128).
 
+## Heads up
+
+- AirPods don't work
+
 ## License
 
 MIT © [aaronshaf](https://github.com/aaronshaf)
