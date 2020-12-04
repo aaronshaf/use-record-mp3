@@ -1,7 +1,7 @@
 {
   "name": "use-record-mp3",
   "version": "0.0.1",
-  "description": "React hook for recording MP3s in the browser",
+  "description": "React hook for recording MP3s",
   "author": "aaronshaf",
   "license": "MIT",
   "repository": "aaronshaf/use-record-mp3",
