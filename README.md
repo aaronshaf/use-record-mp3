@@ -17,7 +17,12 @@ import useRecordMp3 from "use-record-mp3";
 const Example = () => {
   const { stream } = useUserMedia(constraints);
   const { isRecording, setIsRecording, blobUrl, channelData } = useRecordMp3(
-    stream
+    stream,
+    {
+      sampleRate: 48000,
+      channels: 1,
+      vbrQuality: 2, // 1 (highest) to 9 (lowest)
+    }
   );
   // ...
 };

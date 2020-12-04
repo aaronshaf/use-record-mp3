@@ -4,12 +4,12 @@ import useRecordMp3 from "use-record-mp3";
 import ow from "oceanwind";
 
 const constraints = {
-  // audio: true
-  audio: {
-    //   // sampleRate: 48000,
-    //   // sampleSize: 16,
-    // channelCount: 2,
-  },
+  audio: true,
+  // audio: {
+  //   //   // sampleRate: 48000,
+  //   //   // sampleSize: 16,
+  //   // channelCount: 2,
+  // },
 };
 
 // https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
@@ -37,7 +37,12 @@ const filterData = (rawData: any) => {
 const App = () => {
   const { stream } = useUserMedia(constraints);
   const { isRecording, setIsRecording, blobUrl, channelData } = useRecordMp3(
-    stream
+    stream,
+    {
+      sampleRate: 48000,
+      channels: 1,
+      vbrQuality: 2,
+    }
   );
 
   const chart = channelData ? filterData(channelData) : [];

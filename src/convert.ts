@@ -1,9 +1,10 @@
 import { useEffect, useState, useMemo } from "react";
 import { createMp3Encoder } from "wasm-media-encoders";
+import { EncoderOptions } from "./typings";
 
 let outBuffer = new Uint8Array(1024 * 1024);
 
-const useConvert = (pcm_l: any) => {
+const useConvert = (pcm_l: any, options: EncoderOptions = {}) => {
   const [blob, setBlob] = useState<Blob | null>(null);
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const encoderPromise = useMemo(() => createMp3Encoder(), []);
@@ -12,9 +13,9 @@ const useConvert = (pcm_l: any) => {
     if (!pcm_l) return;
     encoderPromise.then((encoder) => {
       encoder.configure({
-        sampleRate: 48000,
-        channels: 1,
-        vbrQuality: 1,
+        sampleRate: options.sampleRate || 48000,
+        channels: options.channels || 1,
+        vbrQuality: options.vbrQuality || 1,
       });
 
       let offset = 0;

@@ -1,6 +1,7 @@
 import { flattenArray } from "./utils";
 import useConvert from "./convert";
 import { useState, useEffect, useRef } from "react";
+import { EncoderOptions } from "./typings";
 
 const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
 
@@ -8,8 +9,9 @@ const bufferSize = 2048;
 const numberOfInputChannels = 1;
 const numberOfOutputChannels = 1;
 
-const useRecordMp3 = (stream: any) => {
+const useRecordMp3 = (stream: any, encoderOptions: EncoderOptions) => {
   const [isRecording, setIsRecording] = useState(false);
+  console.debug(encoderOptions);
 
   const [
     mediaStream,
@@ -21,7 +23,7 @@ const useRecordMp3 = (stream: any) => {
 
   const [channelData, setChannelData] = useState<Float32Array | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
-  const [blobUrl, blob]: any = useConvert(channelData);
+  const [blobUrl, blob]: any = useConvert(channelData, encoderOptions);
 
   useEffect(() => {
     if (isRecording && stream) {
