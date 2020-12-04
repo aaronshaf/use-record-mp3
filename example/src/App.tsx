@@ -1,13 +1,14 @@
 import React from "react";
 import useUserMedia from "react-use-user-media";
 import useRecordMp3 from "use-record-mp3";
+import ow from "oceanwind";
 
 const constraints = {
   // audio: true
   audio: {
     //   // sampleRate: 48000,
     //   // sampleSize: 16,
-    channelCount: 2,
+    // channelCount: 2,
   },
 };
 
@@ -53,21 +54,28 @@ const App = () => {
     );
   });
   return (
-    <div>
-      <button onClick={() => setIsRecording(!isRecording)}>
+    <div className={ow`p-6`}>
+      <button
+        className={ow`px-4 py-2 border border-black rounded text-lg`}
+        onClick={() => setIsRecording(!isRecording)}
+      >
         {isRecording ? "Stop" : "Record"}
       </button>
-      {blobUrl && <audio controls src={blobUrl}></audio>}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          width: "300px",
-          height: "100px",
-        }}
-      >
-        {chartComponents}
-      </div>
+      {blobUrl && (
+        <div className={ow`pt-4`}>
+          <audio controls src={blobUrl}></audio>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "300px",
+              height: "100px",
+            }}
+          >
+            {chartComponents}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
