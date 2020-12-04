@@ -20,6 +20,7 @@
     "oceanwind": "^0.10.0",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
+    "react-github-fork-ribbon": "^0.6.0",
     "react-scripts": "file:../node_modules/react-scripts",
     "react-use-user-media": "0.0.0",
     "twin.macro": "^2.0.4",

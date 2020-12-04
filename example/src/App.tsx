@@ -2,6 +2,7 @@ import React from "react";
 import useUserMedia from "react-use-user-media";
 import useRecordMp3 from "use-record-mp3";
 import ow from "oceanwind";
+import GitHubRibbon from "react-github-fork-ribbon";
 
 const constraints = {
   audio: true,
@@ -102,6 +103,14 @@ const App = () => {
           </div>
         </div>
       )}
+      <GitHubRibbon
+        color="black"
+        position="right"
+        target="_blank"
+        href="https://github.com/aaronshaf/use-record-mp3"
+      >
+        GitHub repo
+      </GitHubRibbon>
     </div>
   );
 };
