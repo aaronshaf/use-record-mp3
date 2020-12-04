@@ -2,7 +2,7 @@
 
 > Record MP3s in React using hooks
 
-[![NPM](https://img.shields.io/npm/v/use-record-mp3.svg)](https://www.npmjs.com/package/use-record-mp3) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/use-record-mp3.svg)](https://www.npmjs.com/package/use-record-mp3)
 
 ## Install
 
