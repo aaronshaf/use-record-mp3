@@ -16,18 +16,21 @@ import useRecordMp3 from "use-record-mp3";
 
 const Example = () => {
   const { stream } = useUserMedia({ audio: true });
-  const { isRecording, setIsRecording, blobUrl, channelData } = useRecordMp3(
-    stream,
-    {
-      sampleRate: 48000,
-      channels: 1,
-      vbrQuality: 2, // 1 (highest) to 9 (lowest)
-    }
-  );
+  const {
+    isRecording,
+    startRecording,
+    stopRecording,
+    blobUrl,
+    channelData,
+  } = useRecordMp3(stream, {
+    sampleRate: 48000,
+    channels: 1,
+    vbrQuality: 2, // 1 (highest) to 9 (lowest)
+  });
 
   return (
     <div>
-      <button onClick={() => setIsRecording(!isRecording)}>
+      <button onClick={isRecording ? stopRecording : startRecording}>
         {isRecording ? "Stop" : "Record"}
       </button>
       {blobUrl && <audio controls src={blobUrl}></audio>}

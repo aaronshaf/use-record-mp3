@@ -36,15 +36,20 @@ const filterData = (rawData: any) => {
 
 const App = () => {
   const { stream } = useUserMedia(constraints);
-  const { isRecording, setIsRecording, blobUrl, channelData } = useRecordMp3(
-    stream,
-    {
-      sampleRate: 48000,
-      channels: 1,
-      bitrate: 96,
-      // vbrQuality: 2,
-    }
-  );
+  const {
+    isRecording,
+    isRecordingPaused,
+    startRecording,
+    stopRecording,
+    pauseRecording,
+    blobUrl,
+    channelData,
+  } = useRecordMp3(stream, {
+    sampleRate: 48000,
+    channels: 1,
+    bitrate: 96,
+    // vbrQuality: 2,
+  });
 
   const chart = channelData ? filterData(channelData) : [];
   const chartComponents = chart.map((number: number, index: number) => {
@@ -62,10 +67,25 @@ const App = () => {
   return (
     <div className={ow`p-6`}>
       <button
-        className={ow`px-4 py-2 border border-black rounded text-lg`}
-        onClick={() => setIsRecording(!isRecording)}
+        disabled={isRecording}
+        className={ow`px-4 mr-1 py-2 border border-black rounded text-lg`}
+        onClick={startRecording}
       >
-        {isRecording ? "Stop" : "Record"}
+        Record
+      </button>
+      <button
+        disabled={!(isRecording || (!isRecording && isRecordingPaused))}
+        className={ow`px-4 mr-1 py-2 border border-black rounded text-lg`}
+        onClick={stopRecording}
+      >
+        Stop
+      </button>
+      <button
+        disabled={!isRecording && !isRecordingPaused}
+        className={ow`px-4 py-2 border border-black rounded text-lg`}
+        onClick={isRecordingPaused ? startRecording : pauseRecording}
+      >
+        Pause
       </button>
       {blobUrl && (
         <div className={ow`pt-4`}>
