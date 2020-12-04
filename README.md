@@ -11,16 +11,16 @@ npm i use-record-mp3
 ## Usage
 
 ```tsx
-import useUserMedia from 'react-use-user-media'
-import useRecordMp3 from 'use-record-mp3'
+import useUserMedia from "react-use-user-media";
+import useRecordMp3 from "use-record-mp3";
 
 const Example = () => {
-  const { stream } = useUserMedia(constraints)
+  const { stream } = useUserMedia(constraints);
   const { isRecording, setIsRecording, blobUrl, channelData } = useRecordMp3(
     stream
-  )
+  );
   // ...
-}
+};
 ```
 
 ## License
