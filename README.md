@@ -1,13 +1,11 @@
 # use-record-mp3
 
-> Record MP3s in React using hooks
-
-[![NPM](https://img.shields.io/npm/v/use-record-mp3.svg)](https://www.npmjs.com/package/use-record-mp3)
+Record MP3s in React using hooks
 
 ## Install
 
 ```bash
-npm install --save use-record-mp3
+npm i use-record-mp3
 ```
 
 ## Usage
