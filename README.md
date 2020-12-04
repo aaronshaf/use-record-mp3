@@ -13,15 +13,15 @@ npm install --save use-record-mp3
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import useUserMedia from 'react-use-user-media'
+import useRecordMp3 from 'use-record-mp3'
 
-import MyComponent from 'use-record-mp3'
-import 'use-record-mp3/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+const Example = () => {
+  const { stream } = useUserMedia(constraints)
+  const { isRecording, setIsRecording, blobUrl, channelData } = useRecordMp3(
+    stream
+  )
+  // ...
 }
 ```
 
