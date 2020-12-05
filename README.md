@@ -43,7 +43,7 @@ Instead of `vbrQuality` you can specify `bitrate` (e.g. 96, 128).
 
 ## Heads up
 
-- AirPods don't work
+- AirPods don't work. Pull requests accepted.
 
 ## License
 
