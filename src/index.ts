@@ -90,13 +90,58 @@ const useRecordMp3 = (stream: any, encoderOptions: EncoderOptions) => {
     setisRecordingPaused(false);
   };
 
+  const sum = (array: Array<number>) =>
+    array.reduce((total, value) => total + value, 0);
+  const average = (array: Array<number>) => sum(array) / array.length;
+
+  const TRIM_SIZE = 5000;
+  const ROLLING_AVERAGE_SIZE = 50;
+
+  // fruits.shift() take from front
+  // fruits.push()
+
+  const trimBeginningSilence = (data: Float32Array) => {
+    const TRIM_THRESHOLD = 0.02;
+    const rollingAverageArray = [];
+    for (let index = 0; index < data.length; index++) {
+      rollingAverageArray.push(Math.abs(data[index]));
+      if (rollingAverageArray.length > ROLLING_AVERAGE_SIZE) {
+        rollingAverageArray.shift();
+      }
+      if (average(rollingAverageArray) > TRIM_THRESHOLD) {
+        return data.slice(index > TRIM_SIZE ? index - TRIM_SIZE : 0);
+      }
+    }
+    return data;
+  };
+
+  const trimEndingSilence = (data: Float32Array) => {
+    const TRIM_THRESHOLD = 0.0075;
+    const rollingAverageArray = [];
+    for (let index = data.length; index > 0; index--) {
+      rollingAverageArray.push(Math.abs(data[index]));
+      if (rollingAverageArray.length > ROLLING_AVERAGE_SIZE) {
+        rollingAverageArray.shift();
+      }
+
+      if (average(rollingAverageArray) > TRIM_THRESHOLD) {
+        return data.slice(
+          0,
+          index < data.length - TRIM_SIZE ? index + TRIM_SIZE : data.length
+        );
+      }
+    }
+    return data;
+  };
+
   useEffect(() => {
     if (isRecording === false) {
       if (recorder && mediaStream && audioContext.current) {
         recorder && recorder.disconnect(audioContext.current.destination);
         mediaStream && mediaStream.disconnect(recorder);
         const data = flattenArray(leftChannel.current, recordingLength.current);
-        setChannelData(data);
+        const trimmedData = trimEndingSilence(trimBeginningSilence(data));
+        setChannelData(trimmedData);
       }
     }
   }, [isRecording]);

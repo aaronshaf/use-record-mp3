@@ -49,6 +49,8 @@ const App = () => {
     vbrQuality: 2,
   });
 
+  // console.debug({ channelData });
+
   const chart = channelData ? filterData(channelData) : [];
   const chartComponents = chart.map((number: number, index: number) => {
     return (
