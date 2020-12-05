@@ -24,7 +24,7 @@ export const trimBeginningSilence = (data: Float32Array) => {
 };
 
 export const trimEndingSilence = (data: Float32Array) => {
-  const TRIM_THRESHOLD = 0.005;
+  const TRIM_THRESHOLD = 0.01;
   const rollingAverageArray = [];
   for (let index = data.length; index > 0; index--) {
     rollingAverageArray.push(Math.abs(data[index]));
