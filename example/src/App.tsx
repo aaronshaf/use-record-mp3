@@ -3,6 +3,7 @@ import useUserMedia from "react-use-user-media";
 import useRecordMp3 from "use-record-mp3";
 import ow from "oceanwind";
 import GitHubRibbon from "react-github-fork-ribbon";
+import { trim } from "./processing";
 
 // https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
 const filterData = (rawData: any) => {
@@ -42,15 +43,18 @@ const App = () => {
     pauseRecording,
     blobUrl,
     channelData,
-  } = useRecordMp3(stream, {
-    sampleRate: 48000,
-    channels: 1,
-    // bitrate: 96,
-    vbrQuality: 2,
-  });
-
-  // console.debug({ channelData });
-
+  } = useRecordMp3(
+    stream,
+    {
+      sampleRate: 48000,
+      channels: 1,
+      // bitrate: 96,
+      vbrQuality: 2,
+    },
+    {
+      post: trim,
+    }
+  );
   const chart = channelData ? filterData(channelData) : [];
   const chartComponents = chart.map((number: number, index: number) => {
     return (
